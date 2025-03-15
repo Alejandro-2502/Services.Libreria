@@ -1,0 +1,10 @@
+ERROR: 2025-03-11 22:22:14 - LibroCommandDaoAddEl nombre de columna 'Tiburon' no es válido.
+El nombre de columna 'Desconocido' no es válido.
+ERROR: 2025-03-14 18:37:25 - UsuarioInteractorGetUserMissing type map configuration or unsupported mapping.
+
+Mapping types:
+UserDTO -> UsuarioResponse
+Libreria.Application.DTOs.UserDTO -> Libreria.Application.Responses.UsuarioResponse
+ERROR: 2025-03-15 14:30:48 - LibroCommandDaoDeleteSintaxis incorrecta cerca de '}'.
+ERROR: 2025-03-15 14:50:34 - LibroQuerysDaoGetByIdDebe declarar la variable escalar '@id'.
+ERROR: 2025-03-15 14:51:26 - LibroQuerysDaoGetByIdDebe declarar la variable escalar '@id'.

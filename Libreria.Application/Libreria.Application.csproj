@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Messages\MessageLibreria.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MessageLibreria.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Messages\MessagesValidationsLibro.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MessagesValidationsLibro.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Messages\MessageToken.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MessageToken.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Messages\MessageLibreria.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageLibreria.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Messages\MessagesValidationsLibro.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessagesValidationsLibro.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Messages\MessageToken.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MessageToken.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
