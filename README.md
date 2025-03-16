@@ -1,10 +1,10 @@
 # Services.Libreria
 Un Ejemplo de un Servicio, aplicando patrones de diseño, Clean Architecture, Security JWT, FluentValidation, entre otras características
 
-Se implemento el patrone (Clean Architecture). Se aplica Principios SOLID.
+Se implemento el patron (Clean Architecture). Se aplica, para este desarrollo Principios SOLID.
 Para el acceso a la base de datos, se emplea OMR ( DAPPER ). Ademas se aplica Inyeccion de Dependencias (DI) 
-Tambien, se utiliza (FluentValidation), a fin de aplicar validaciones basicas a el INPUT de los request.
-A fin de aplicar cierta seguridad, se emplea el uso de ( JWT - Jason Web Token ).
+Tambien, se utiliza (FluentValidation), a fin de aplicar validaciones basicas a el INPUT del request.
+Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Jason Web Token ).
 
 El diseño empleado consta de las siguientes capas que se mencionan a continuación:
 
@@ -16,8 +16,8 @@ Capa Principal Servicio .API - (Presenter):
   - LibroQuerysController
   - TokenController ( Se genera el token, para el acceso a los endpoints )
   
-- Tambien se encuentra alojado las clases, propias de configuraciones de ( App y Services ). La idea de realizarlo asi, fue de mantener segmentada, 
-  para mas entendimiento, las configuraciones requeridas, para esta Api Services. 
+- Tambien se encuentra alojado las clases, propias de configuraciones de ( App y Services ). La idea de realizarlo asi, era mantener segmentada, 
+  para una mayor claridad y para la utilidad de ( EXTENSIONES ) en las configuraciones requeridas, para este Api Services. 
   
   - Extensiones :
 	- IApplicationBuildExtension ( clase Statica )
