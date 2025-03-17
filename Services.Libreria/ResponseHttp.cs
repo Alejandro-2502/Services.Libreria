@@ -27,6 +27,9 @@ public class ResponseHttp : ControllerBase
                 case HttpStatusCode.BadRequest:
                     return BadRequest(response);
 
+                case HttpStatusCode.Unauthorized:
+                    return BadRequest(response);
+
                 default:
                     return BadRequest("Estado HTTPs no manejado explícitamente");
             }

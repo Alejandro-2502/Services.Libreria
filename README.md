@@ -4,6 +4,7 @@ Un Ejemplo de un Servicio, aplicando patrones de diseño, Clean Architecture, Se
 Se implemento el patron (Clean Architecture). Se aplica, para este desarrollo Principios SOLID.
 Para el acceso a la base de datos, se emplea OMR ( DAPPER ). Ademas se aplica Inyeccion de Dependencias (DI) 
 Tambien, se utiliza (FluentValidation), a fin de aplicar validaciones basicas a el INPUT del request.
+Tambien, se agregan Unitets. ( MSTest - Mock)
 Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Jason Web Token ).
 
 El diseño empleado consta de las siguientes capas que se mencionan a continuación:
@@ -62,6 +63,25 @@ Capa Infraestructura:
 	  - LibroDAO
 	  - UsuarioDAO
 	  
+Capa Testing:
+
+	- Dentro de esta capa, se creo para realizar las puebas unitarias (MSTest),  para este caso, se crearon los casos mediante Mock, para la clase 
+	  que realiza las operaciones de busquedas ( QuerysLibro ).
+	  
+	-  Libro
+	
+		- Command
+			- CommandData ( Falta completar )
+			- CommandTest ( Falta completar )
+			
+		- Querys
+			- QuerysData ( Se obtiene los datos, para realizar las pruebas )
+			- QuerysTest ( Se crean las pruebas unitarias, con los datos Moqueados )
+				Casos:
+					- GetAll - OK
+					- GetAll - NotFound
+					- GetAll - InternalServerError
+			
 Nota: Como una simple aclaracion, es tan solo un simple ejemplo, de una forma de muchas existentes, para realizar este desarrollo. Es tan solo a modo de ejemplo
 
 Saludos.! Gracias
