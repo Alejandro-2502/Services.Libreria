@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Services.Libreria.API.Controllers.v1;
 
-[Authorize]
+//[Authorize]
 [ApiController]
 public class LibroQuerysController : ControllerBase
 {
