@@ -1,5 +1,5 @@
 # Services.Libreria
-Un Ejemplo de un Servicio, aplicando patrones de diseño, Clean Architecture, Security JWT, FluentValidation, entre otras características
+Un Ejemplo de un Servicio, aplicando patrones de diseño, Clean Architecture, Security JWT, FluentValidation, UnitTest con Mock y RedisCache, entre otras características
 
 Se implemento el patron (Clean Architecture). Se aplica, para este desarrollo Principios SOLID.
 Para el acceso a la base de datos, se emplea OMR ( DAPPER ). Ademas se aplica Inyeccion de Dependencias (DI) 
@@ -32,27 +32,64 @@ Capa de aplicación:
 Se encuentra toda la estructura que se podrá utilizar, dentro de las otras capas, si así fuese necesario. Dentro de esta capa, están alojados dentro de directorios, para un mayor ordenamiemto y disponibles lo siguiente:
 
 	- Configurations
+ 		- ConfigHelper
+   		- ConfigJwt
+     		- ConfigSqlServer
+       		- ServerRedis
+	 	- TTLCacheRedis
 	- DTO
 	- Gateways
-	- Genérics
+ 		- ILibroCommandGateway
+   		- ILibroQuerysGateway
+     		- IUsuarioGateway
+       
+	- Genérics	
+ 		- Responses<T>
 	- Helpers
+ 		- Token
+   			- TokenHelper
 	- Interactor
 		- Common
+  			- LogServicesInteractor
+  		- Redis
+    			- DistributedRedisCacheInteractor
 		- Token
+  			- TokenInteractor
+  		- LibroCommandInteractor
+    		- LibroQuerysInteractor
+      		- UsuarioInteractor
+		- ValidationsInteractor
 	
 	- Interfaces
 		- ICommon
+  			- ILogServicesInteractor
+     		- Redis
+       			- IDistributedRedisCacheInteractor
 		- Token
+  			- ITokenInteractor
+     		- ILibroCommandInteractor
+       		- ILibroQuerysInteractor
+	 	- IUsuarioInteractor
+   		- IValidationsInteractor
 	
 	- Mappers 
 		- MapperProfiles (Se emplea Automapper)
 		- Token ( Se emplea un mapper manual )
+  			- TokenResponseMapper
 		
 	- Messages : ( Se emplea archivos de recursos, para el contenido de los mensajes de validaciones y advertencias, que se puedan producir durante la ejecución del flujo)
 	
 	- Request ( Clase empelada, para los datos y estructura, que será empleada en el input de los endpoint )
 	- Responses ( Clases creadas de tipo Genericas, para estandarizar, lo ma optimo posible, la salida a respuestas de las solicitudes de cada endponit )
+ 		- Common
+   			- Response
+      		- Token
+			- TokenResponse
+   		- LibroResponse
+     		- UsuarioResponse
+       
 	- Validations ( Contiene las validaciones basicas, empleando FluentValidation, aplicado al Request )
+ 		- LibroValidations
 		
 Capa Infraestructura:
 
@@ -60,8 +97,12 @@ Capa Infraestructura:
 	  Tambien contiene un archivo recurso ( Scripts ), donde se encontraran alojados los Querys, que seran empleado en esta capa de Accesos a DB, mediante DAPPER
 	- DAOs
 	  - Helper
+   		- CreateParameters
 	  - LibroDAO
+   		- LibroCommandDao
+     		- LibroQuerysDao
 	  - UsuarioDAO
+   		- UsuarioDAO
 	  
 Capa Testing:
 
