@@ -14,6 +14,8 @@ public static class IServicesCollectionsExtension
     {
         ConfigHelper.ConfigSqlServer = configuration.GetSection(nameof(ConfigSqlServer)).Get<ConfigSqlServer>();
         ConfigHelper.ConfigJwt = configuration.GetSection(nameof(ConfigJwt)).Get<ConfigJwt>();
+        ConfigHelper.ServerRedis = configuration.GetSection(nameof(ServerRedis)).Get<ServerRedis>();
+        ConfigHelper.TTLCaches = configuration.GetSection(nameof(TTLCacheRedis)).Get<TTLCacheRedis>();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -66,6 +68,18 @@ public static class IServicesCollectionsExtension
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigHelper.ConfigJwt.Key))
             };
         });
+
+        return services;
+    }
+
+    public static IServiceCollection AddStackExchangeRedisCache(this IServiceCollection services)
+    {
+
+        services.AddStackExchangeRedisCache(option =>
+        {
+            option.Configuration = ConfigHelper.ServerRedis!.Localhost;
+        });
+
         return services;
     }
 }

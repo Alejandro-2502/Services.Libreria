@@ -4,9 +4,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace Libreria.Application.Helpers;
+namespace Libreria.Application.Helpers.Token;
 
-public static class Token
+public static class TokenHelper
 {
     public static Claim[] GetClaim(UserDTO userDTO)
     {

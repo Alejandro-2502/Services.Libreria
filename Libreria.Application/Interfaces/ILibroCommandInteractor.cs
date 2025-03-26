@@ -1,5 +1,4 @@
-﻿using Libreria.Application.DTOs;
-using Libreria.Application.Generics;
+﻿using Libreria.Application.Generics;
 using Libreria.Application.Request;
 
 namespace Libreria.Application.Interfaces

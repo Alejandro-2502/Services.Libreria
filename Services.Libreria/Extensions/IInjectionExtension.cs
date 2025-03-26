@@ -1,9 +1,11 @@
 ﻿using Libreria.Application.Gateways;
 using Libreria.Application.Interactors;
 using Libreria.Application.Interactors.Common;
+using Libreria.Application.Interactors.Redis;
 using Libreria.Application.Interactors.Token;
 using Libreria.Application.Interfaces;
 using Libreria.Application.Interfaces.ICommon;
+using Libreria.Application.Interfaces.Redis;
 using Libreria.Application.Interfaces.Token;
 using Libreria.Application.Validations;
 using Libreria.Infrastructura;
@@ -23,6 +25,7 @@ public static class IInjectionExtension
             services.AddSingleton<IUsuarioInteractor, UsuarioInteractor>();
             services.AddSingleton<ITokenInteractor, TokenInteractor>();
             services.AddSingleton<IUsuarioGateway, UsuarioDAO>();
+            services.AddSingleton<IDistributedRedisCacheInteractor, DistributedRedisCacheInteractor>();
 
             services.AddSingleton<LibroValidations>();
             services.AddSingleton<IValidationsInteractor, ValidationsInteractor>();

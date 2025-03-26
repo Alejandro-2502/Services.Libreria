@@ -3,6 +3,7 @@ using Libreria.Application.Gateways;
 using Libreria.Application.Generics;
 using Libreria.Application.Interfaces;
 using Libreria.Application.Interfaces.ICommon;
+using Libreria.Application.Interfaces.Redis;
 using Libreria.Application.Responses;
 using Libreria.Application.Responses.Common;
 using System.Net;
@@ -14,19 +15,26 @@ public class LibroQuerysInteractor : ILibroQuerysInteractor
     private readonly ILogServicesInteractor _logServicesInteractor;
     private readonly ILibroQuerysGateway _libroQuerysGateway;
     private readonly IMapper _mapper;
+    private readonly IDistributedRedisCacheInteractor _distributedRedisCacheInteractor;
 
-    public LibroQuerysInteractor(ILogServicesInteractor logServicesInteractor, ILibroQuerysGateway libroQuerysGateway, 
-                                 IMapper mapper)
+    public LibroQuerysInteractor(ILogServicesInteractor logServicesInteractor, ILibroQuerysGateway libroQuerysGateway,
+                                 IMapper mapper, IDistributedRedisCacheInteractor distributedRedisCacheInteractor)
     {
         _logServicesInteractor = logServicesInteractor;
         _libroQuerysGateway = libroQuerysGateway;
         _mapper = mapper;
+        _distributedRedisCacheInteractor = distributedRedisCacheInteractor;
     }
     public async Task<Responses<List<LibroResponse>>> GetAll()
     {
         try
         {
-            var result = await _libroQuerysGateway.GetAll();
+            var cacheKey = $"Libros";
+
+            var result = await _distributedRedisCacheInteractor.GetOrSetAsync(cacheKey,
+                async () =>
+                {return await _libroQuerysGateway.GetAll();},
+                Caches.Libros)!;
            
             if (result is null) 
                 return await Response.Error<List<LibroResponse>>(HttpStatusCode.NotFound, Messages.MessageLibreria.NotFound);
@@ -46,7 +54,12 @@ public class LibroQuerysInteractor : ILibroQuerysInteractor
     {
         try 
         {
-            var result = await _libroQuerysGateway.GetById(id);
+            var cacheKey = $"Libros_{id}";
+
+            var result = await _distributedRedisCacheInteractor.GetOrSetAsync(cacheKey,
+                async () =>
+                {return await _libroQuerysGateway.GetById(id); },
+                Caches.Libro_Id)!;
 
             if (result is null)
                 return await Response.Error<LibroResponse>(HttpStatusCode.NotFound, Messages.MessageLibreria.NotFound);
@@ -66,7 +79,13 @@ public class LibroQuerysInteractor : ILibroQuerysInteractor
     {
         try
         {
-            var result = await _libroQuerysGateway.GetByPriceGreaterThan(price);
+            
+            var cacheKey = $"Libros_{price}";
+
+            var result = await _distributedRedisCacheInteractor.GetOrSetAsync(cacheKey,
+                async () =>
+                {return await _libroQuerysGateway.GetByPriceGreaterThan(price);},
+                Caches.Libro_Price)!;
 
             if (result is null)
                 return await Response.Error<List<LibroResponse>>(HttpStatusCode.NotFound, Messages.MessageLibreria.NotFound);

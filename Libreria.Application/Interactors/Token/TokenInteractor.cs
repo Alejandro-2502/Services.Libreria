@@ -31,13 +31,13 @@ public class TokenInteractor : ITokenInteractor
         {
             var userDTO = _mapper.Map<UserDTO>(usuarioResponse);
             
-            var claims = Helpers.Token.GetClaim(userDTO);
+            var claims = Helpers.Token.TokenHelper.GetClaim(userDTO);
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigHelper.ConfigJwt.Key));
 
             var singIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
-            var jwtSecurity = Helpers.Token.GetJwtSecurityToken(claims, singIn);
+            var jwtSecurity = Helpers.Token.TokenHelper.GetJwtSecurityToken(claims, singIn);
 
             string token = new JwtSecurityTokenHandler().WriteToken(jwtSecurity);
 
