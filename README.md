@@ -5,9 +5,10 @@ Se implemento el patron (Clean Architecture). Se aplica, para este desarrollo Pr
 Para el acceso a la base de datos, se emplea OMR ( DAPPER ). Ademas se aplica Inyeccion de Dependencias (DI) 
 Tambien, se utiliza (FluentValidation), a fin de aplicar validaciones basicas a el INPUT del request.
 Tambien, se agregan Unitets. ( MSTest - Mock)
-Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Jason Web Token ).
+Tambien se agrega la utilidad de una base de datos de tipo Cache ( RedisCache )
+Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Jason Web Token )
 
-El diseño empleado consta de las siguientes capas que se mencionan a continuación:
+El diseño empleado consta de las siguientes capas que se mencionan a continuación
 
 Capa Principal Servicio .API:
 
@@ -25,7 +26,7 @@ Capa Principal Servicio .API:
 	- IServiceCollectionExtensions ( clase Statica )
 	- IInjectionsExtensions ( clase Statica )
 	
-- Archivos de Appsetting: Dentro se encuentra la conexion a la DB, como asi tambien los parametros, necesarios, para confeccionar la estructura de JWT
+- Archivos de Appsetting (Dentro se encuentra la conexion a la DB, como asi tambien los parametros, necesarios, para confeccionar la estructura de JWT y Redis Cache )
 
 Capa de aplicación:
 
