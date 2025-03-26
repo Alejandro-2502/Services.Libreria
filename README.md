@@ -9,9 +9,9 @@ Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Jason Web
 
 El diseño empleado consta de las siguientes capas que se mencionan a continuación:
 
-Capa Principal Servicio .API - (Presenter):
+Capa Principal Servicio .API:
 
-- La misma contiene los controladores.
+- La misma contiene los controladores
   
   - LibroCommandController
   - LibroQuerysController
@@ -20,7 +20,7 @@ Capa Principal Servicio .API - (Presenter):
 - Tambien se encuentra alojado las clases, propias de configuraciones de ( App y Services ). La idea de realizarlo asi, era mantener segmentada, 
   para una mayor claridad y para la utilidad de ( EXTENSIONES ) en las configuraciones requeridas, para este Api Services. 
   
-  - Extensiones :
+  - Extensiones
 	- IApplicationBuildExtension ( clase Statica )
 	- IServiceCollectionExtensions ( clase Statica )
 	- IInjectionsExtensions ( clase Statica )
