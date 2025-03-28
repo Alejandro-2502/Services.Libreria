@@ -42,13 +42,13 @@ bld/
 Generated\ Files/
 
 # MSTest test Results
-[Tt]est[Rr]esult*/
-[Bb]uild[Ll]og.*
+#[Tt]est[Rr]esult*/
+#[Bb]uild[Ll]og.*
 
 # NUnit
-*.VisualState.xml
-TestResult.xml
-nunit-*.xml
+#*.VisualState.xml
+#TestResult.xml
+#nunit-*.xml
 
 # Build Results of an ATL Project
 [Dd]ebugPS/
@@ -64,10 +64,10 @@ project.fragment.lock.json
 artifacts/
 
 # ASP.NET Scaffolding
-ScaffoldingReadMe.txt
+#ScaffoldingReadMe.txt
 
 # StyleCop
-StyleCopReport.xml
+#StyleCopReport.xml
 
 # Files built by Visual Studio
 *_i.c
@@ -133,7 +133,7 @@ _ReSharper*/
 *.DotSettings.user
 
 # TeamCity is a build add-in
-_TeamCity*
+#_TeamCity*
 
 # DotCover is a Code Coverage Tool
 *.dotCover
@@ -158,7 +158,7 @@ nCrunchTemp_*
 
 # MightyMoose
 *.mm.*
-AutoTest.Net/
+#AutoTest.Net/
 
 # Web workbench (sass)
 .sass-cache/
@@ -211,8 +211,8 @@ csx/
 *.build.csdef
 
 # Microsoft Azure Emulator
-ecf/
-rcf/
+#ecf/
+#rcf/
 
 # Windows Store app package directories and files
 AppPackages/
@@ -282,8 +282,8 @@ FakesAssemblies/
 *.GhostDoc.xml
 
 # Node.js Tools for Visual Studio
-.ntvs_analysis.dat
-node_modules/
+#.ntvs_analysis.dat
+#node_modules/
 
 # Visual Studio 6 build log
 *.plg
@@ -313,8 +313,8 @@ paket-files/
 .cr/personal
 
 # Python Tools for Visual Studio (PTVS)
-__pycache__/
-*.pyc
+#__pycache__/
+#*.pyc
 
 # Cake - Uncomment if you are using it
 # tools/**
