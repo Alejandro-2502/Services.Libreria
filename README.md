@@ -3,10 +3,10 @@ Un Ejemplo de un Servicio, aplicando patrones de diseño, Clean Architecture, Se
 
 Se implemento el patron (Clean Architecture). Se aplica, para este desarrollo Principios SOLID.
 Para el acceso a la base de datos, se emplea OMR ( DAPPER ). Ademas se aplica Inyeccion de Dependencias (DI) 
-Tambien, se utiliza (FluentValidation), a fin de aplicar validaciones basicas a el INPUT del request.
+Tambien, se utiliza (FluentValidation), para aplicar validaciones basicas a el INPUT del request.
 Tambien, se agregan Unitets. ( MSTest - Mock)
 Tambien se agrega la utilidad de una base de datos de tipo Cache ( RedisCache )
-Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Jason Web Token )
+Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Json Web Token )
 
 El diseño empleado consta de las siguientes capas que se mencionan a continuación
 
