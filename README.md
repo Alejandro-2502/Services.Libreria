@@ -1,11 +1,12 @@
 # Services.Libreria
-Un Ejemplo de un Servicio, aplicando patrones de diseño, Clean Architecture, Security JWT, FluentValidation, UnitTest con Mock y RedisCache, entre otras características
+Un Ejemplo de un Servicio, aplicando patrones de diseño, Clean Architecture, Security JWT, FluentValidation, UnitTest con Mock y RedisCache, Polly Retry, entre otras características
 
 Se implemento el patron (Clean Architecture). Se aplica, para este desarrollo Principios SOLID.
 Para el acceso a la base de datos, se emplea OMR ( DAPPER ). Ademas se aplica Inyeccion de Dependencias (DI) 
 Tambien, se utiliza (FluentValidation), para aplicar validaciones basicas a el INPUT del request.
 Tambien, se agregan Unitets. ( MSTest - Mock)
 Tambien se agrega la utilidad de una base de datos de tipo Cache ( RedisCache )
+Tambien se agrega Polly, para realizar los reintentos, en caso de alguna exepcion
 Por ultimo se utiliza, para brindar seguridad, en los endpoint ( JWT - Json Web Token )
 
 El diseño empleado consta de las siguientes capas que se mencionan a continuación
@@ -38,6 +39,7 @@ Se encuentra toda la estructura que se podrá utilizar, dentro de las otras capa
      		- ConfigSqlServer
        		- ServerRedis
 	 	- TTLCacheRedis
+   		- Pollys
 	- DTO
 	- Gateways
  		- ILibroCommandGateway
@@ -49,6 +51,9 @@ Se encuentra toda la estructura que se podrá utilizar, dentro de las otras capa
 	- Helpers
  		- Token
    			- TokenHelper
+      		- PollyRetry
+			- PollyCommand
+   			- PollyQuerys
 	- Interactor
 		- Common
   			- LogServicesInteractor
