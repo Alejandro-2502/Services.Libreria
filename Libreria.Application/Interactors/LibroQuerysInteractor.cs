@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Libreria.Application.Gateways;
 using Libreria.Application.Generics;
+using Libreria.Application.Helpers.PollyRetry;
 using Libreria.Application.Interfaces;
 using Libreria.Application.Interfaces.ICommon;
 using Libreria.Application.Interfaces.Redis;
@@ -29,13 +30,19 @@ public class LibroQuerysInteractor : ILibroQuerysInteractor
     {
         try
         {
+            var pollyRetry = PollyQuerys.GetPollyRetry();
             var cacheKey = $"Libros";
 
             var result = await _distributedRedisCacheInteractor.GetOrSetAsync(cacheKey,
                 async () =>
-                {return await _libroQuerysGateway.GetAll();},
+                { 
+                    return await pollyRetry.ExecuteAsync(async () =>
+                    {
+                        return await _libroQuerysGateway.GetAll();
+                    });
+                },
                 Caches.Libros)!;
-           
+
             if (result is null) 
                 return await Response.Error<List<LibroResponse>>(HttpStatusCode.NotFound, Messages.MessageLibreria.NotFound);
 
@@ -54,11 +61,17 @@ public class LibroQuerysInteractor : ILibroQuerysInteractor
     {
         try 
         {
+            var pollyRetry = PollyQuerys.GetPollyRetry();
             var cacheKey = $"Libros_{id}";
 
             var result = await _distributedRedisCacheInteractor.GetOrSetAsync(cacheKey,
                 async () =>
-                {return await _libroQuerysGateway.GetById(id); },
+                {
+                    return await pollyRetry.ExecuteAsync(async () =>
+                    {
+                        return await _libroQuerysGateway.GetById(id);
+                    });
+                },
                 Caches.Libro_Id)!;
 
             if (result is null)
@@ -74,17 +87,21 @@ public class LibroQuerysInteractor : ILibroQuerysInteractor
             return await Response.Error<LibroResponse>(HttpStatusCode.InternalServerError, ex.Message);
         }
     }
-
     public async Task<Responses<List<LibroResponse>>> GetByPriceGreaterThan(decimal price)
     {
         try
         {
-            
+            var pollyRetry = PollyQuerys.GetPollyRetry();
             var cacheKey = $"Libros_{price}";
 
             var result = await _distributedRedisCacheInteractor.GetOrSetAsync(cacheKey,
                 async () =>
-                {return await _libroQuerysGateway.GetByPriceGreaterThan(price);},
+                {
+                    return await pollyRetry.ExecuteAsync(async () =>
+                    {
+                        return await _libroQuerysGateway.GetByPriceGreaterThan(price);
+                    });
+                },
                 Caches.Libro_Price)!;
 
             if (result is null)
