@@ -2,6 +2,7 @@
 using Libreria.Application.DTOs;
 using Libreria.Application.Gateways;
 using Libreria.Application.Generics;
+using Libreria.Application.Helpers.PollyRetry;
 using Libreria.Application.Interfaces;
 using Libreria.Application.Interfaces.ICommon;
 using Libreria.Application.Request;
@@ -25,12 +26,16 @@ public class LibroCommandInteractor : ILibroCommandInteractor
         _mapper = mapper;
         _validationsInteractor = validationsInteractor;
     }
-
     public async Task<Responses<bool>> Delete(int id)
     {
         try
         {
-            var result = await _libroCommandGateway.Delete(id);
+            var pollyRetry = PollyCommand.GetPollyRetry();
+
+            var result = await pollyRetry.ExecuteAsync(async () =>
+            {
+                return await _libroCommandGateway.Delete(id);
+            });
 
             if (!result)
                 return await Response.Error<bool>(HttpStatusCode.UnprocessableEntity, Messages.MessageLibreria.DeleteError);
@@ -56,10 +61,14 @@ public class LibroCommandInteractor : ILibroCommandInteractor
             if (resultValidator.Any())
                 return await Response.ErrorsList<bool>(HttpStatusCode.BadRequest, resultValidator);
 
-
             var resultDTO = _mapper.Map<LibroDTO>(libroRequest);
 
-            var result = await _libroCommandGateway.Add(resultDTO);
+            var pollyRetry = PollyCommand.GetPollyRetry();
+
+            var result = await pollyRetry.ExecuteAsync(async () =>
+            {
+                return await _libroCommandGateway.Add(resultDTO);
+            });
 
             if (!result)
                 return await Response.Error<bool>(HttpStatusCode.UnprocessableEntity, Messages.MessageLibreria.AddError);
@@ -87,7 +96,12 @@ public class LibroCommandInteractor : ILibroCommandInteractor
 
             var resultDTO = _mapper.Map<LibroDTO>(libroRequest);
 
-            var result = await _libroCommandGateway.Update(resultDTO);
+            var pollyRetry = PollyCommand.GetPollyRetry();
+
+            var result = await pollyRetry.ExecuteAsync(async () =>
+            {
+                return await _libroCommandGateway.Update(resultDTO);
+            });
 
             if (!result)
                 return await Response.Error<bool>(HttpStatusCode.UnprocessableEntity, Messages.MessageLibreria.UpdateError, false);

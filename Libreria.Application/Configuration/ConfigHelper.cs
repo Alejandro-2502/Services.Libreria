@@ -6,4 +6,5 @@ public class ConfigHelper
     public static ConfigJwt ConfigJwt { get; set; }
     public static ServerRedis? ServerRedis { get; set; }
     public static TTLCacheRedis? TTLCaches { get; set; }
+    public static Pollys? Pollys { get; set; }
 }

@@ -16,6 +16,7 @@ public static class IServicesCollectionsExtension
         ConfigHelper.ConfigJwt = configuration.GetSection(nameof(ConfigJwt)).Get<ConfigJwt>();
         ConfigHelper.ServerRedis = configuration.GetSection(nameof(ServerRedis)).Get<ServerRedis>();
         ConfigHelper.TTLCaches = configuration.GetSection(nameof(TTLCacheRedis)).Get<TTLCacheRedis>();
+        ConfigHelper.Pollys = configuration.GetSection(nameof(Pollys)).Get<Pollys>();
 
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
